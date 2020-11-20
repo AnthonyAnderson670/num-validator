@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Phone Number Validator</title>
+		<style>
+			body {
+				text-align: center;
+				background-color: #A6A6A6
+			}
+			
+			#phone {
+				padding-bottom: 10px;
+			}
+			
+			#container {
+				border: thick dotted;
+			}
+			
+			/* invalid phone number */
+			.invalid {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="container">
+		<div id="phone">
+			<p>Enter a phone number to see if it meets the requirements.</p>
+    		<p>Telephone Number: <input type="text" id="phoneNum" placeholder="1-888-888-8888"></p>
+			<button onclick="validatePhone()" id="submit">Submit</button>
+  		</div>
+		<!-- result of validation -->
+		<span id="validate"></span>
+			</div>
+	
+		<script>
+			function validatePhoneNumber(input_str) {
+				let phoneExp = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/;
+				return phoneExp.test(input_str);
+			}
+
+			function validatePhone(event) {
+    		let phone = document.getElementById("phoneNum").value;
+    			if (!validatePhoneNumber(phone)) {
+					document.getElementById('validate').innerHTML = "Please Enter a Valid Phone Number";
+					document.getElementById('validate').setAttribute("class", "invalid");
+    			} else {
+        			document.getElementById('validate').innerHTML = "That is a Valid Phone Number!";
+					document.getElementById('validate').removeAttribute("class", "invalid");
+    			}
+			}
+			
+			//submit when return is pressed
+			phone.addEventListener("keyup", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					document.getElementById("submit").click();
+				}
+			});
+		</script>
+	</body>
+</html>
